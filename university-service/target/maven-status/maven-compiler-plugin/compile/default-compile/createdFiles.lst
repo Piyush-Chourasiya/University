@@ -1,0 +1,15 @@
+com/example/university/service/controllerimpl/AssignmentControllerImpl.class
+com/example/university/service/services/CourseService.class
+com/example/university/service/repository/CourseRepository.class
+com/example/university/service/controllerimpl/CourseControllerImpl.class
+com/example/university/service/services/impl/UserServiceImpl.class
+com/example/university/service/repository/UserRepository.class
+com/example/university/service/repository/AssignmentRepository.class
+com/example/university/service/controllerimpl/UserControllerImpl.class
+com/example/university/service/mail/UniversityMailSender.class
+com/example/university/service/services/impl/CourseServiceImpl.class
+com/example/university/service/services/AssignmentService.class
+com/example/university/service/config/UniversitySecurity.class
+com/example/university/service/services/UserService.class
+com/example/university/service/security/UniversityUserDetails.class
+com/example/university/service/services/impl/AssignmentServiceImpl.class

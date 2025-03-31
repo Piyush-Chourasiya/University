@@ -1,0 +1,15 @@
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/config/UniversitySecurity.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/mail/UniversityMailSender.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/repository/AssignmentRepository.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/services/UserService.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/controllerimpl/AssignmentControllerImpl.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/repository/CourseRepository.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/repository/UserRepository.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/services/impl/CourseServiceImpl.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/controllerimpl/CourseControllerImpl.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/services/CourseService.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/controllerimpl/UserControllerImpl.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/services/impl/AssignmentServiceImpl.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/services/impl/UserServiceImpl.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/security/UniversityUserDetails.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/services/AssignmentService.java

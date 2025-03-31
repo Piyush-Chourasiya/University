@@ -1,0 +1,8 @@
+com/example/university/api/model/Course.class
+com/example/university/api/model/User.class
+com/example/university/api/model/Schedule.class
+com/example/university/api/model/AssignmentSubmission.class
+com/example/university/api/controller/AssignmentController.class
+com/example/university/api/controller/CourseController.class
+com/example/university/api/controller/UserController.class
+com/example/university/api/model/Assignment.class
