@@ -28,7 +28,7 @@ public class UniversityMailSender {
         logger.info("Starting to send assignment notifications for course: {} with {} assignments to {} students", 
         course.getCourseCode(), newAssignments.size(), students.size());
         for (User student : students) {
-            if(student.getRole() == "PROFESSOR" || student.getRole() == "ADMIN"  )
+            if(student.getRole().toString() == "PROFESSOR" || student.getRole().toString() == "ADMIN"  )
             {
                 logger.info("Skipping notification for user {} with role {}", student.getEmail(), student.getRole());
                  continue;
@@ -67,5 +67,39 @@ public class UniversityMailSender {
             javaMailSender.send(message);
         }
         return true;
+    }
+
+    @Async
+    public boolean sendUsernameAndPasswordNotification(User user) {
+        logger.info("Sending username and password notification to user: {}", user.getEmail());
+        
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(user.getEmail());
+            message.setSubject("Your University Portal Account Information");
+            
+            StringBuilder messageText = new StringBuilder();
+            messageText.append("Dear ").append(user.getFirstName()).append(" ").append(user.getLastName()).append(",\n\n");
+            messageText.append("Welcome to the University Portal! Your account has been created successfully.\n\n");
+            messageText.append("Your login credentials are as follows:\n");
+            messageText.append("Username: ").append(user.getUsername()).append("\n");
+            
+            // Note: In a real application, you would never send an actual password in plain text
+            // This is just for demonstration purposes. Typically, you would send a temporary 
+            // password or a password reset link instead.
+            messageText.append("Password: ").append(user.getPassword()).append("\n\n");
+            
+            messageText.append("Please log in to the university portal and change your password immediately for security reasons.\n\n");
+            messageText.append("Regards,\nUniversity Team");
+            
+            message.setText(messageText.toString());
+            javaMailSender.send(message);
+            
+            logger.info("Successfully sent account information to: {}", user.getEmail());
+            return true;
+        } catch (Exception e) {
+            logger.error("Failed to send account information to: {}", user.getEmail(), e);
+            return false;
+        }
     }
 }

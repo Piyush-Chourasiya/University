@@ -2,6 +2,8 @@ package com.example.university.api.controller;
 
 import com.example.university.api.model.Assignment;
 import java.util.List;
+
+import com.example.university.api.wrapper.AssignmentRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +18,7 @@ public interface AssignmentController {
     
     @PostMapping
     @PreAuthorize("hasRole('PROFESSOR')")
-    ResponseEntity<Assignment> createAssignment(@RequestBody Assignment assignment);
+    ResponseEntity<Assignment> createAssignment(@RequestBody AssignmentRequest assignmentRequest);
     
     @PutMapping("/{id}")
     ResponseEntity<Assignment> updateAssignment(@PathVariable Integer id, @RequestBody Assignment assignment);

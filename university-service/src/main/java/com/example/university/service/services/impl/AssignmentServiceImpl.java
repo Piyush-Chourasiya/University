@@ -3,6 +3,7 @@ package com.example.university.service.services.impl;
 import com.example.university.api.model.Assignment;
 import com.example.university.api.model.Course;
 import com.example.university.api.model.User;
+import com.example.university.api.wrapper.AssignmentRequest;
 import com.example.university.service.repository.AssignmentRepository;
 import com.example.university.service.repository.CourseRepository;
 import com.example.university.service.repository.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -36,43 +38,39 @@ public class AssignmentServiceImpl implements AssignmentService {
     
     @Override
     @Transactional
-    public Assignment createAssignment(Assignment assignment) {
-        logger.info("Creating new assignment for course ID: {}", 
-                assignment.getCourse() != null ? assignment.getCourse().getId() : "null");
-        
-        assignment.setCreatedAt(LocalDateTime.now());
-        assignment.setUpdatedAt(LocalDateTime.now());
-        assignment.setDueDate(LocalDateTime.now().plusDays(14));
-        
-        logger.info("Assignment details - Title: {}, Description: {}, Due date: {}", 
-                assignment.getTitle(), 
-                assignment.getDescription(), 
-                assignment.getDueDate());
-        
-        Assignment savedAssignment = assignmentRepository.save(assignment);
-        logger.info("Assignment saved with ID: {}", savedAssignment.getId());
-        
-        
-        Course course = assignment.getCourse();
-        logger.info("Course: {}", course);
-
+    public Assignment createAssignment(AssignmentRequest assignmentRequest) {
+        Optional<Course> optionalCourse = courseRepository.findById(Integer.parseInt(assignmentRequest.getCourseID()));
+        Course course = optionalCourse.get();
         if(course==null)
         {
             logger.info("Course is null");
         }
+
+         Optional<User> optionalInstructor = userRepository.findById(Integer.parseInt(assignmentRequest.getCourseInstructor()));
+         User instructor = optionalInstructor.get();
+        Assignment assignment = new Assignment(assignmentRequest.getTitle(),assignmentRequest.getDescription(),LocalDateTime.now().plusDays(7)
+                ,course,instructor,LocalDateTime.now(),LocalDateTime.now());
+
+
+        Assignment savedAssignment = assignmentRepository.save(assignment);
+        logger.info("Assignment saved with ID: {}", savedAssignment.getId());
         
         // Get all students enrolled in this course
         List<User> enrolledStudents = userRepository.findByCourseAndRole(course.getId(), "STUDENT");
         logger.info("Found {} students enrolled in course ID: {}", enrolledStudents.size(), course.getId());
         
         // Send email notification
-        universityMailSender.sendNewAssignmentNotification(enrolledStudents, course, List.of(savedAssignment));
-        logger.info("Email notifications sent successfully to {} students", enrolledStudents.size());
+        if(universityMailSender.sendNewAssignmentNotification(enrolledStudents, course, List.of(savedAssignment)))
+        {
+            logger.info("Email notifications sent successfully to {} students", enrolledStudents.size());
+        }
+        else {
+            logger.info("Email notifications not sent successfully to students");
+        }
         return savedAssignment;
     }
     
     @Override
-    @Transactional
     public Assignment updateAssignment(Integer id, Assignment assignment) {
         assignment.setId(id);
         return assignmentRepository.save(assignment);
@@ -96,7 +94,6 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
     
     @Override
-    @Transactional
     public void deleteAssignment(Integer id) {
         assignmentRepository.deleteById(id);
     }

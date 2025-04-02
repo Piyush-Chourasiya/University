@@ -8,6 +8,7 @@ com/example/university/service/repository/AssignmentRepository.class
 com/example/university/service/controllerimpl/UserControllerImpl.class
 com/example/university/service/mail/UniversityMailSender.class
 com/example/university/service/services/impl/CourseServiceImpl.class
+com/example/university/service/security/RoleCacheFilter.class
 com/example/university/service/services/AssignmentService.class
 com/example/university/service/config/UniversitySecurity.class
 com/example/university/service/services/UserService.class

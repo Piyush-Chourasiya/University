@@ -45,7 +45,8 @@ public class User {
     private String address;
     
     @Column(name = "ROLE", nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
     
     // Fields specific to professors
     @Column(name = "DEPARTMENT")
@@ -66,5 +67,11 @@ public class User {
     // User submissions (for students)
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AssignmentSubmission> submissions = new HashSet<>();
+
+    public enum UserRole {
+        STUDENT,
+        PROFESSOR,
+        ADMIN
+    }
 
 }

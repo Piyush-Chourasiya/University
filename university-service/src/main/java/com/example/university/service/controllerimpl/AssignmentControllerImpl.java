@@ -2,6 +2,7 @@ package com.example.university.service.controllerimpl;
 
 import com.example.university.api.controller.AssignmentController;
 import com.example.university.api.model.Assignment;
+import com.example.university.api.wrapper.AssignmentRequest;
 import com.example.university.service.services.AssignmentService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class AssignmentControllerImpl implements AssignmentController {
     private  AssignmentService assignmentService;
     
     @Override
-    public ResponseEntity<Assignment> createAssignment(Assignment assignment) {
-        Assignment createdAssignment = assignmentService.createAssignment(assignment);
+    public ResponseEntity<Assignment> createAssignment(AssignmentRequest assignmentRequest) {
+        Assignment createdAssignment = assignmentService.createAssignment(assignmentRequest);
         return new ResponseEntity<>(createdAssignment, HttpStatus.CREATED);
     }
     

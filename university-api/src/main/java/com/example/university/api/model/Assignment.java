@@ -58,4 +58,17 @@ public class Assignment {
     
     @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AssignmentSubmission> submissions = new HashSet<>();
+
+
+    public Assignment(String title, String description, LocalDateTime dueDate, Course course,
+                      User createdBy, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.course = course;
+        this.createdBy = createdBy;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
 }

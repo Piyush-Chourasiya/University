@@ -26,7 +26,7 @@ public class UniversityUserDetails implements UserDetailsService {
         if (user == null) {
             throw new NoSuchElementException("user not found");
         }
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().toString()));
         return new User(user.getUsername(), user.getPassword(), authorities);
     }
 }

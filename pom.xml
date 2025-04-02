@@ -40,7 +40,7 @@
             </dependency>
             <dependency>
                 <groupId>com.example.university</groupId>
-                <artifactId>cmp-university</artifactId>
+                <artifactId>university-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

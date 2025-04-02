@@ -10,10 +10,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-/**
- * AssignmentSubmission class that represents student submissions
- * and their grades in a single entity
- */
+
 @Entity
 @Table(name = "ASSIGNMENT_SUBMISSIONS")
 @Data
@@ -44,30 +41,30 @@ public class AssignmentSubmission {
     @Column(name = "FILE_TYPE")
     private String fileType;
     
-    @Column(name = "FILE_SIZE")
-    private Long fileSize;
-    
     @Column(name = "SUBMITTED_AT")
     private LocalDateTime submittedAt;
     
-    @Column(name = "IS_LATE")
-    private Boolean isLate;
-    
-    @Column(name = "SUBMISSION_STATUS")
-    private String submissionStatus; // "SUBMITTED", "RESUBMITTED", "UNDER_REVIEW", "GRADED"
+    @Column(name = "IS_LATE",columnDefinition = "DEFAULT false")
+    private Boolean isLate = false;
+
+    @Column(name = "SUBMISSION_STATUS", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status submissionStatus;
     
     // Grade details
-    
-    @Column(name = "LETTER_GRADE")
-    private String letterGrade;
+    // A ,B, C
+    @Column(name = "GRADE")
+    private String grade;
     
     @Column(name = "FEEDBACK", length = 1000)
-    private String feedback;
+    private String gradeFeedback;
     
     @ManyToOne
     @JoinColumn(name = "GRADER_ID")
     private User gradedBy;
-    
-    @Column(name = "IS_GRADED")
-    private Boolean isGraded = false;
+
+    public enum Status{
+        SUBMITTED,
+        GRADED
+    }
 } 

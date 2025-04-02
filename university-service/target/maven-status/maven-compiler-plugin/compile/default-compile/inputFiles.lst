@@ -1,4 +1,5 @@
 /Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/config/UniversitySecurity.java
+/Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/security/RoleCacheFilter.java
 /Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/mail/UniversityMailSender.java
 /Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/repository/AssignmentRepository.java
 /Users/ent-00301/Desktop/University/university/university-service/src/main/java/com/example/university/service/services/UserService.java

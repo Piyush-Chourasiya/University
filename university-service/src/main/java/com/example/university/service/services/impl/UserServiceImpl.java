@@ -1,20 +1,31 @@
 package com.example.university.service.services.impl;
 
+import com.example.university.service.mail.UniversityMailSender;
 import com.example.university.service.services.UserService;
 import com.example.university.api.model.User;
 import com.example.university.service.repository.UserRepository;
+import com.example.university.service.security.RoleCacheFilter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UniversityMailSender universityMailSender;
 
     private final UserRepository userRepository;
 
@@ -34,10 +45,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {;
+    public User createUser(User user) {
+       try{
+        if(user == null)
+        {
+            logger.error("User can not be null");
+            throw new Exception("User can not be null");
+        }
+        if(User.UserRole.STUDENT.equals(user.getRole()) || Objects.equals(user.getRole().toString(), "PROFESSOR" ))
+        {
+            if(universityMailSender.sendUsernameAndPasswordNotification(user))
+            {
+                logger.info("Username and Password send through mail successfully.......");
+            }
+            else {
+                logger.info("Mail not send.......");
+            }
+        }
         String encodePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);
         return userRepository.save(user);
+       } catch (Exception e) {
+           throw new RuntimeException(e);
+       }
     }
 
     @Override

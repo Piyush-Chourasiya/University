@@ -67,13 +67,12 @@ public class CourseServiceImpl implements CourseService {
     }
    
     @Override
-    @Transactional
+
     public void delete(Integer id) {
         courseRepository.deleteById(id);
     }
     
     @Override
-    @Transactional
     public Course enrollStudent(Course course, User student) {
         logger.debug("Enrolling student ID: {} to course ID: {}", student.getId(), course.getId());
         
@@ -93,7 +92,6 @@ public class CourseServiceImpl implements CourseService {
     }
     
     @Override
-    @Transactional
     public Course unenrollStudent(Course course, User student) {
         // Remove student from the course's enrolled students
         course.getEnrolledStudents().remove(student);
